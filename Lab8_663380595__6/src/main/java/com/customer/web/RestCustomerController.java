@@ -5,15 +5,17 @@ import com.customer.dto.CustomerResponse;
 import com.customer.model.Customer;
 import com.customer.repository.CustomerRepository;
 import jakarta.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customers")
+
 public class RestCustomerController {
 
     private final CustomerRepository repo;
@@ -25,7 +27,11 @@ public class RestCustomerController {
     @PostMapping
     public ResponseEntity<CustomerResponse> create(@Valid @RequestBody CustomerReq req) {
         Customer saved = repo.save(new Customer(req.getName(), req.getEmail()));
-        return ResponseEntity.ok(CustomerResponse.fromEntity(saved));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/{id}")
+                        .buildAndExpand(saved.getId())
+                        .toUri();
+        return ResponseEntity.created(location).body(CustomerResponse.fromEntity(saved));
     }
 
     @GetMapping("/{id}")
@@ -65,4 +71,10 @@ public class RestCustomerController {
             return ResponseEntity.notFound().build();
         }
     }
+    
+    
+    
+
+    
+    
 }
