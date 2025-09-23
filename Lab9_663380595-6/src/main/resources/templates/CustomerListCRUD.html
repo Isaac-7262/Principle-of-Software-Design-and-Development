@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Customer List</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<body>
+<h2>List of Customers</h2>
+
+<!-- ปุ่ม Add ย้ายออกมานอก loop -->
+<a th:href="@{'/web/createcustomer'}">Add New Customer</a>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th>Email</th>
+<th>Actions</th>
+</tr>
+
+<tr th:each="customer : ${customers}">
+<td th:text="${customer.id}"></td>
+<td th:text="${customer.name}"></td>
+<td th:text="${customer.email}"></td>
+<td>
+  <a th:href="@{'/web/customers/' + ${customer.id}}">View</a> |
+  <a th:href="@{'/web/editcustomer/' + ${customer.id}}">Edit</a> |
+  <a th:href="@{'/web/deletecustomer/' + ${customer.id}}">Delete</a>
+</td>
+</tr>
+</table>
+</body>
+</html>

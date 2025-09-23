@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymealeaf.org">
+<head>
+<title>Show Cities</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<body>
+<h2>List of Customers</h2>
+<table>
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th>Email</th>
+</tr>
+<tr th:each = "customer:${customers}">
+<td th:text="${customer.id}"></td>
+<td th:text="${customer.name}"></td>
+<td th:text="${customer.email}"></td>
+<td>
+     <a th:href="@{'/web/createcustomer'}">Add</a> |
+     <a th:href="@{'/web/customers/' + ${customer.id}}">View</a> |
+    <a th:href="@{'/web/editcustomer/' + ${customer.id}}">Edit</a> |
+    <a th:href="@{'/web/deletecustomer/' + ${customer.id}}">Delete</a>
+  </td>
+</tr>
+</table>
+</body>
+</html>

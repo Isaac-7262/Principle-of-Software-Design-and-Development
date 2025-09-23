@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Customer Detail</title>
+<meta charset="UTF-8" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Customer Information</h1>
+<p th:text="'Id: ' + ${customer.id}"></p>
+<p th:text="'Customer Name: ' + ${customer.name}"></p>
+<p th:text="'Email: ' + ${customer.email}"></p>
+<br>
+<a th:href="@{'/web/customers'}">Back to List</a>
+</body>
+</html>
